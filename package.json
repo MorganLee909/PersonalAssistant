@@ -1,0 +1,24 @@
+{
+  "name": "personalassistant",
+  "version": "1.0.0",
+  "description": "A personal assistant",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MorganLee909/PersonalAssistant.git"
+  },
+  "author": "Lee Morgan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MorganLee909/PersonalAssistant/issues"
+  },
+  "homepage": "https://github.com/MorganLee909/PersonalAssistant#readme",
+  "dependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.5"
+  }
+}
