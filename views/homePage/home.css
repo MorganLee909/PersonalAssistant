@@ -7,4 +7,27 @@ html{
 body{
     height: 100%;
     display: flex;
+    text-align: center;
 }
+
+#loginReg{
+    display: flex;
+}
+
+    .form{
+        display: flex;
+        flex-direction: column;
+        border: 3px solid #05befc;
+        padding: 15px;
+        margin: auto 25px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 5px black;
+    }
+
+        .form label{
+            margin: 10px;
+        }
+
+        .form input{
+            float: right;
+        }

@@ -8,6 +8,47 @@
     <body>
         <% include ../shared/header %>
 
+        <% include ../shared/banner %>
+
+        <div id="loginReg">
+            <div class="form" id="register">
+                <h3>Register</h3>
+
+                <label>Name:
+                    <input id="nameReg" type="text" required>
+                </label>
+
+                <label>Email:
+                    <input id="emailReg" type="email" required>
+                </label>
+
+                <label>Password:
+                    <input id="passReg" type="password" required>
+                </label>
+
+                <label>Confirm password:
+                    <input id="confirmPassReg" type="password" required>
+                </label>
+
+                <button onclick="homePage.register()">Submit</button>
+            </div>
+
+            <div class="form" id="login">
+                <h3>Login</h3>
+
+                <label>Email:
+                    <input id="emailLog" type="email" required>
+                </label>
+
+                <label>Password:
+                    <input id="passLog" type="password" required>
+                </label>
+
+                <button onclick="homePage.login()">Submit</button>
+            </div>
+        </div>
+
+        <script src="/shared/validation.js"></script>
         <script src="/homePage/home.js"></script>
     </body>
 </html>
