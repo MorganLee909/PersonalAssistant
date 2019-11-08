@@ -4,7 +4,6 @@ const bcrypt = require("bcryptjs");
 
 module.exports = {
     landingPage: function(req, res){
-        console.log(req.session.user);
         return res.render("homePage/home");
     },
 
@@ -21,8 +20,9 @@ module.exports = {
         let newUser = new User({
             username: user.username,
             email: user.email,
-            password: hash
+            password: hash,
         });
+        newUser.account.balance = 0;
 
         User.find({email: newUser.email})
             .then((users)=>{
@@ -65,6 +65,6 @@ module.exports = {
     },
 
     dashboard: function(req, res){
-        return res.render("/dashboardPage/dashboard");
+        return res.render("dashboardPage/dashboard");
     }
 }

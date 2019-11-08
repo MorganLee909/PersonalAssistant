@@ -10,4 +10,5 @@ module.exports = function(app){
 
     //Finances
     app.get("/finances", finance.finances);
+    app.post("/budget/transaction", finance.createTransaction);
 }

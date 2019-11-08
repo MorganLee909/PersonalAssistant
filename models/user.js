@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const TransactionSchema = require("./transaction");
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -18,6 +19,13 @@ const UserSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    account: {
+        transactions: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Transaction"
+        }],
+        balance: Number
     }
 });
 
