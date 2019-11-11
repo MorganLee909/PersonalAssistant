@@ -54,6 +54,16 @@ html, body{
             border-collapse: collapse;
         }
 
+            .transRow{
+                cursor: pointer;
+                transition: 0.5s;
+            }
+
+                .transRow:hover{
+                    box-shadow: 0 0 50px black;
+                    border-radius: 10px;
+                }
+
             th:nth-of-type(even){
                 color: white;
                 background: rgba(0, 0, 0);
@@ -70,9 +80,13 @@ html, body{
             }
 
             tr:nth-of-type(even){
-                background: rgba(5, 190, 252, 0.075);
+                background: rgba(5, 190, 252, 0.2);
             }
 
             tr:nth-of-type(odd){
                 background: rgba(0, 0, 0, 0.075);
             }
+
+.transaction{
+    display: none;
+}

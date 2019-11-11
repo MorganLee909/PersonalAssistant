@@ -56,6 +56,19 @@
             </div>
         </div>
 
+        <div class="transaction">
+            <div class="head">
+                <h1>Account of <%=user.username%></h1>
+                <h2>Balance: $<span id="balance"><%=user.account.balance.toFixed(2)%></span></h2>
+            </div>
+
+            <h4>Date: <span id="transDate"></span></h4>
+            <h4>Category: <span id="transCategory"></span></h4>
+            <h4>Location: <span id="transLocation"></span></h4>
+            <h4>Amount: <span id="transAmount"></span></h4>
+            <h4>Note: <span id="transNote"></span></h4>
+        </div>
+
         <script>let user = <%- JSON.stringify(user) %>;</script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="/financePage/finance.js"></script>
