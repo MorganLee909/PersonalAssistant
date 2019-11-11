@@ -22,7 +22,7 @@ let financePage = {
             row.appendChild(location);
 
             let amount = document.createElement("td");
-            amount.innerText = `$${transaction.amount}`;
+            amount.innerText = `$${transaction.amount.toFixed(2)}`;
             row.appendChild(amount);
         }
     },
