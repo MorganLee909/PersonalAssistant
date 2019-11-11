@@ -7,8 +7,6 @@ module.exports = {
             let date = new Date();
             let firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
             let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-            console.log(firstDay);
-            console.log(lastDay);
 
             User.findOne({_id: "5dc566fdf739f91be5726130"})
                 .populate({
@@ -16,7 +14,8 @@ module.exports = {
                     match: {date: {
                         $gte: firstDay,
                         $lt: lastDay
-                    }}
+                    }},
+                    options: {sort: "-date"}
                 })
                 .then((user)=>{
                     Transaction.find()

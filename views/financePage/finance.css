@@ -4,29 +4,40 @@ html, body{
     height: 100%;
 }
 
-body{
-    display: flex;
-    justify-content: space-between;
+.header{
+    float: left;
     height: 100%;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 25px;
     text-align: center;
 }
 
-    .content{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+.content > *{
+    width: 100%;
+}
+
+    .head{
+        margin-bottom: 25px;
     }
 
-        .head{
-            margin-bottom: 25px;
-        }
+    .horizontal{
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
 
         form{
             display: flex;
             flex-direction: column;
             border: 3px solid #05befc;
             padding: 15px;
-            margin: auto 25px;
+            margin: 25px;
             border-radius: 10px;
             box-shadow: 5px 5px 5px black;
         }
@@ -37,4 +48,31 @@ body{
 
             form input{
                 float: right;
+            }
+
+        table{
+            border-collapse: collapse;
+        }
+
+            th:nth-of-type(even){
+                color: white;
+                background: rgba(0, 0, 0);
+            }
+
+            th:nth-of-type(odd){
+                color: white;
+                background: rgba(5, 190, 252);
+            }
+
+            th, td{
+                padding: 10px;
+                margin: 0;
+            }
+
+            tr:nth-of-type(even){
+                background: rgba(5, 190, 252, 0.075);
+            }
+
+            tr:nth-of-type(odd){
+                background: rgba(0, 0, 0, 0.075);
             }
