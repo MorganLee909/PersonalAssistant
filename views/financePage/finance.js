@@ -39,7 +39,7 @@ let financePage = {
 
         axios.post("/budget/transaction", transaction)
             .then(()=>{
-                user.account.balance = "$" + (Number(user.account.balance) + Number(transaction.amount)).toString();
+                user.account.balance = (Number(user.account.balance) + Number(transaction.amount)).toFixed(2).toString();
                 document.querySelector("#balance").innerText = user.account.balance;
                 user.account.transactions.unshift(transaction);
                 this.displayTransactions();

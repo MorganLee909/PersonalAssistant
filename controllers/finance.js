@@ -35,7 +35,7 @@ module.exports = {
                 .then((transaction)=>{
                     User.findOne({_id: "5dc566fdf739f91be5726130"})
                         .then((user)=>{
-                            user.account.balance += transaction.amount;
+                            user.account.balance = (user.account.balance + transaction.amount).toFixed(2);
                             user.account.transactions.push(transaction);
                             user.save()
                                 .then((user)=>{
