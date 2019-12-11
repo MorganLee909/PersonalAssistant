@@ -1,4 +1,9 @@
-let homePage = {
+let loginRegObj = {
+    display: function(){
+        controller.clearScreen();
+        controller.loginRegStrand.style.display = "flex";
+    },
+
     register: function(){
         let newUser = {
             username: document.querySelector("#nameReg").value,

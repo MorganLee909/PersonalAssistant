@@ -10,7 +10,7 @@
 
         <% include ../shared/banner %>
 
-        <div id="loginReg">
+        <div id="loginRegStrand">
             <div class="form" id="register">
                 <h3>Register</h3>
 
@@ -30,7 +30,7 @@
                     <input id="confirmPassReg" type="password" required>
                 </label>
 
-                <button onclick="homePage.register()">Submit</button>
+                <button onclick="loginRegObj.register()">Submit</button>
             </div>
 
             <div class="form" id="login">
@@ -44,11 +44,13 @@
                     <input id="passLog" type="password" required>
                 </label>
 
-                <button onclick="homePage.login()">Submit</button>
+                <button onclick="loginRegObj.login()">Submit</button>
             </div>
         </div>
 
+        <script>let error = <%- JSON.stringify(error) %>;</script>
         <script src="/shared/validation.js"></script>
-        <script src="/homePage/home.js"></script>
+        <script src="/homePage/controller.js"></script>
+        <script src="/homePage/loginReg.js"></script>
     </body>
 </html>

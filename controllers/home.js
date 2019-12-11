@@ -4,7 +4,15 @@ const bcrypt = require("bcryptjs");
 
 module.exports = {
     landingPage: function(req, res){
-        return res.render("homePage/home");
+        let error = {};
+        if(req.session.error){
+            error = req.session.error;
+            req.session.error = undefined;
+        }else{
+            error = null;
+        }
+
+        return res.render("homePage/home", {error: error});
     },
 
     register: function(req, res){
@@ -27,7 +35,7 @@ module.exports = {
         User.find({email: newUser.email})
             .then((users)=>{
                 if(users.length > 0){
-                    //Need to display error message for email exists
+                    req.session.error = "Account already exists for that email";
                     return res.redirect("/");
                 }
 
