@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const TransactionSchema = require("./transaction");
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -24,6 +23,26 @@ const UserSchema = new mongoose.Schema({
         transactions: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Transaction"
+        }],
+        bills: [{
+            name: {
+                type: String,
+                required: true
+            },
+            amount: Number
+        }],
+        income: [{
+            name: {
+                type: String,
+                required: true
+            }
+        }],
+        allowances: [{
+            name: {
+                type: String,
+                required: true
+            },
+            amount: Number
         }],
         balance: Number
     }

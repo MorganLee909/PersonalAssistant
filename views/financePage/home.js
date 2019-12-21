@@ -1,16 +1,20 @@
-// console.log(user);
-
-let financePage = {
-    home: document.querySelector(".home"),
-    transaction: document.querySelector(".transaction"),
-
+let homeObj = {
+    isPopulated: false,
+    
     //Displays the main page
     //Populates the table with transactions
-    displayHome: function(){
-        this.home.style.display = "flex";
-        this.transaction.style.display = "none";
+    display: function(){
+        controller.clearScreen();
+        controller.homeStrand.style.display = "flex";
 
-        let tbody = document.querySelector(".home tbody");
+        if(!this.isPopulated){
+            this.populate();
+        }
+    },
+
+    populate: function(){
+        //Populate transactions
+        let tbody = document.querySelector("#homeStrand tbody");
 
         while(tbody.children.length > 0){
             tbody.removeChild(tbody.firstChild);
@@ -19,7 +23,7 @@ let financePage = {
         for(let transaction of user.account.transactions){
             let transactionDate = new Date(transaction.date);
             let row = document.createElement("tr");
-            row.onclick = ()=>{this.singleTransaction(transaction._id);};
+            row.onclick = ()=>{transactionObj.display(transaction._id);};
             row.classList = "transRow";
             tbody.appendChild(row);
 
@@ -35,32 +39,41 @@ let financePage = {
             amount.innerText = `$${Number(transaction.amount).toFixed(2)}`;
             row.appendChild(amount);
         }
-    },
 
-    //Detailed display of a single transaction
-    singleTransaction: function(id){
-        this.home.style.display = "none";
-        this.transaction.style.display = "block";
+        //Add categories to new transaction form
+        let select = document.querySelector("#category");
 
-        let currentTransaction = {};
-        for(let transaction of user.account.transactions){
-            if(transaction._id === id){
-                currentTransaction = transaction;
-                break;
-            }
+        for(let bill of user.account.bills){
+            let option = document.createElement("option");
+            option.value = bill._id;
+            option.innerText = bill.name;
+            select.appendChild(option);
         }
 
-        document.querySelector("#transDate").innerText = new Date(currentTransaction.date).toDateString();
-        document.querySelector("#transCategory").innerText = currentTransaction.category;
-        document.querySelector("#transLocation").innerText = currentTransaction.location;
-        document.querySelector("#transAmount").innerText = `$${currentTransaction.amount}`;
-        document.querySelector("#transNote").innerText = currentTransaction.note;
+        for(let allowance of user.account.allowances){
+            let option = document.createElement("option");
+            option.value = allowance._id;
+            option.innerText = allowance.name;
+            select.appendChild(option);
+        }
+
+        for(let income of user.account.income){
+            let option = document.createElement("option");
+            option.value = income._id;
+            option.innerText = income.name;
+            select.appendChild(option);
+        }
+
+        if(select.children.length <= 0){
+            banner.createError("Please add one or more categories in order to create transactions");
+        }
     },
 
     //Axios request to create new transaction in database
     //Adds the transaction to the transaction list
     newTransaction: function(){
         event.preventDefault();
+
         let transaction = {
             category: document.querySelector("#category").value,
             amount: document.querySelector("#amount").value,
@@ -74,13 +87,10 @@ let financePage = {
                 user.account.balance = (Number(user.account.balance) + Number(transaction.amount)).toFixed(2).toString();
                 document.querySelector("#balance").innerText = user.account.balance;
                 user.account.transactions.unshift(transaction);
-                this.displayHome();
+                this.display();
             })
             .catch((err)=>{
-                console.log(err);
                 banner.createError("Looks like there's been an oopsie");
             });
     }
 }
-
-financePage.displayHome();

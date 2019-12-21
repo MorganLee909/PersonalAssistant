@@ -1,26 +1,14 @@
-*{margin:0;padding:0;}
-
-html, body{
-    height: 100%;
-}
-
-.header{
-    float: left;
-    height: 100%;
-}
-
-.home{
+#homeStrand{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
     padding: 25px;
     text-align: center;
 }
 
-.home > *{
-    width: 100%;
-}
+    #homeStrand > *{
+        margin: 15px;
+    }
 
     .head{
         margin-bottom: 25px;
@@ -35,7 +23,7 @@ html, body{
         form{
             display: flex;
             flex-direction: column;
-            border: 3px solid #05befc;
+            border: 3px solid rgb(5, 190, 252);
             padding: 15px;
             margin: 25px;
             border-radius: 10px;
@@ -87,6 +75,64 @@ html, body{
                 background: rgba(0, 0, 0, 0.075);
             }
 
-.transaction{
+#transactionStrand{
     display: none;
+    flex-direction: column;
+    align-items: center;
 }
+
+    .transactionInfo{
+        display: flex;
+        flex-direction: column;
+    }
+
+        .transactionInfo > *{
+            margin: 15px;
+        }
+
+        .transactionInfo h4{
+            color: rgb(5, 190, 252);
+        }
+
+            .transactionInfo h4 span{
+                color: black;
+            }
+
+#categoriesStrand{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+    #categoriesStrand > *{
+        margin: 15px;
+    }
+
+    .newCategory{
+        border: 2px solid rgb(5, 190, 252);
+    }
+
+    .tables{
+        display: flex;
+        justify-content: space-around;
+    }
+
+        .tables > *{
+            margin: 10px;
+        }
+
+        .table{
+            text-align: center;
+        }
+
+    .newCategory{
+        display: none;
+        flex-direction: column;
+    }
+
+    #newCategoryForm{
+        display: none;
+        flex-direction: column;
+        border: none;
+        box-shadow: none;
+    }

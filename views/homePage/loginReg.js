@@ -5,6 +5,8 @@ let loginRegObj = {
     },
 
     register: function(){
+        event.preventDefault();
+
         let newUser = {
             username: document.querySelector("#nameReg").value,
             email: document.querySelector("#emailReg").value,
@@ -31,6 +33,8 @@ let loginRegObj = {
     },
 
     login: function(){
+        event.preventDefault();
+        
         let loginer = {
             email: document.querySelector("#emailLog").value,
             password: document.querySelector("#passLog").value

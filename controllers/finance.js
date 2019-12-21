@@ -12,22 +12,27 @@ module.exports = {
         let firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
-        User.findOne({_id: "5dc958d6b9077f29dc69bec9"})
+        User.findOne({_id: req.session.user})
             .populate({
                 path: "account.transactions",
                 match: {date: {
                     $gte: firstDay,
                     $lt: lastDay
-                }},
-                options: {sort: "-date"}
+                }}
             })
             .then((user)=>{
-                Transaction.find()
+                user.password = undefined;
                 return res.render("financePage/finance", {user: user});
             })
             .catch((err)=>{
-                console.log(err);
-                return res.render("error");
+                let errorMessage = "Error: Unable to retrieve user data";
+                let error = new Error({
+                    displayMessage: errorMessage,
+                    error: err
+                });
+                error.save()
+
+                return res.redirect("/dashboard", {error: error});
             });
     },
 
@@ -40,27 +45,45 @@ module.exports = {
         let newTransaction = new Transaction(req.body);
         newTransaction.save()
             .then((transaction)=>{
-                User.findOne({_id: "5dc958d6b9077f29dc69bec9"})
+                User.findOne({_id: req.session.user})
                     .then((user)=>{
                         user.account.balance = (user.account.balance + transaction.amount).toFixed(2);
                         user.account.transactions.push(transaction);
                         user.save()
                             .then((user)=>{
-                                return res.json();
+                                return res.json({});
                             })
                             .catch((err)=>{
-                                console.log(err);
-                                return res.redirect("/error");
+                                let errorMessage = "Error: Unable to save data";
+                                let error = new Error({
+                                    displayMessage: errorMessage,
+                                    error: err
+                                });
+                                error.save();
+
+                                return res.json(errorMessage);
                             });
                     })
                     .catch((err)=>{
-                        console.log(err);
-                        return res.redirect("/error");
+                        let errorMessage = "Error: Unable to retrieve user data";
+                        let error = new Error({
+                            displayMessage: errorMessage,
+                            error: err
+                        });
+                        error.save();
+
+                        return res.json(errorMessage);
                     })
             })
             .catch((err)=>{
-                console.log(err);
-                return res.redirect("/error");
+                let errorMessage = "Error: Unable to create a new transaction";
+                let error = new Error({
+                    displayMessage: errorMessage,
+                    error: err
+                });
+                error.save();
+
+                return res.json(displayMessage);
             });
     }
 }

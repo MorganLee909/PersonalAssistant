@@ -11,7 +11,7 @@
         <% include ../shared/banner %>
 
         <div id="loginRegStrand">
-            <div class="form" id="register">
+            <form class="form" onsubmit="loginRegObj.register()">
                 <h3>Register</h3>
 
                 <label>Name:
@@ -30,10 +30,10 @@
                     <input id="confirmPassReg" type="password" required>
                 </label>
 
-                <button onclick="loginRegObj.register()">Submit</button>
-            </div>
+                <input type="submit" value="Register">
+            </form>
 
-            <div class="form" id="login">
+            <form class="form" onsubmit="loginRegObj.login()">
                 <h3>Login</h3>
 
                 <label>Email:
@@ -44,13 +44,13 @@
                     <input id="passLog" type="password" required>
                 </label>
 
-                <button onclick="loginRegObj.login()">Submit</button>
-            </div>
+                <input type="submit" value="Log In">
+            </form>
         </div>
 
         <script>let error = <%- JSON.stringify(error) %>;</script>
         <script src="/shared/validation.js"></script>
-        <script src="/homePage/controller.js"></script>
         <script src="/homePage/loginReg.js"></script>
+        <script src="/homePage/controller.js"></script>
     </body>
 </html>

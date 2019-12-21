@@ -1,5 +1,19 @@
+/* General */
+*{margin:0;padding:0;}
+
+html, body{
+    height: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
 .header{
     background: black;
     color: #05befc;
     padding: 25px;
+    margin-bottom: 15px;
 }
