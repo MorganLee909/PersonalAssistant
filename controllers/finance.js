@@ -85,5 +85,45 @@ module.exports = {
 
                 return res.json(displayMessage);
             });
+    },
+
+    //Creates a new transaction category
+    //Inputs:
+    //  req.body.categoryName: the name of the category to place it in
+    //  req.body.data:  The category object
+    createCategory: function(req, res){
+        if(!req.session.user){
+            req.session.error = "Must be logged in to do that";
+            return res.redirect("/");
+        }
+
+        User.findOne({_id: req.session.user})
+            .then((user)=>{
+                user.account.categories[req.body.categoryName].push(req.body.data);
+                user.save()
+                    .then((user)=>{
+                        return res.json({});
+                    })
+                    .catch((err)=>{
+                        let errorMessage = "Error: unable to save data";
+                        let error = new Error({
+                            displayMessage: errorMessage,
+                            error: err
+                        });
+                        error.save;
+
+                        return res.json(errorMessage);
+                    });
+            })
+            .catch((err)=>{
+                let errorMessage = "Error: Unable to retrieve user data";
+                let error = new Error({
+                    displayMessage: errorMessage,
+                    error: err
+                });
+                error.save();
+
+                return res.json(errorMessage);
+            });
     }
 }

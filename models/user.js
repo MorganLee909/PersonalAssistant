@@ -24,26 +24,28 @@ const UserSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Transaction"
         }],
-        bills: [{
-            name: {
-                type: String,
-                required: true
-            },
-            amount: Number
-        }],
-        income: [{
-            name: {
-                type: String,
-                required: true
-            }
-        }],
-        allowances: [{
-            name: {
-                type: String,
-                required: true
-            },
-            amount: Number
-        }],
+        categories: {
+            bills: [{
+                name: {
+                    type: String,
+                    required: true
+                },
+                amount: Number
+            }],
+            income: [{
+                name: {
+                    type: String,
+                    required: true
+                }
+            }],
+            allowances: [{
+                name: {
+                    type: String,
+                    required: true
+                },
+                amount: Number
+            }],
+        },
         balance: Number
     }
 });
