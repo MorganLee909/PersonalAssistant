@@ -2,6 +2,58 @@ let categoriesObj = {
     display: function(){
         controller.clearScreen();
         controller.categoriesStrand.style.display = "flex";
+
+        this.populateTables();
+    },
+
+    populateTables: function(){
+        let billTable = document.querySelector("#billTable tbody");
+        let incomeTable = document.querySelector("#incomeTable tbody");
+        let allowanceTable = document.querySelector("#allowanceTable tbody");
+
+        while(billTable.children.length > 0){
+            billTable.removeChild(billTable.firstChild);
+        }
+
+        while(incomeTable.children.length > 0){
+            incomeTable.removeChild(incomeTable.firstChild);
+        }
+
+        while(billTable.children.length > 0){
+            allowanceTable.removeChild(allowanceTable.firstChild);
+        }
+
+        for(let transaction of user.account.transactions){
+            let row = document.createElement("tr");
+
+            let date = document.createElement("td");
+            date.innerText = (new Date(transaction.date)).toDateString();
+            row.appendChild(date);
+
+            let location = document.createElement("td");
+            location.innerText = transaction.location;
+            row.appendChild(location);
+
+            let amount = document.createElement("td");
+            amount.innerText = `$${transaction.amount}`;
+            row.appendChild(amount);
+
+            let subCategory = "";
+            for(let category of user.account.categories){
+                if(category.name === transaction.category){
+                    subCategory = category.subCategory;
+                    break;
+                }
+            }
+
+            if(subCategory === "bill"){
+                billTable.appendChild(row);
+            }else if(subCategory === "income"){
+                incomeTable.appendChild(row);
+            }else{
+                allowanceTable.appendChild(row);
+            }
+        }
     },
 
     newCategory: function(){
@@ -10,7 +62,6 @@ let categoriesObj = {
 
     newCategoryForm: function(type){
         let newCategoryForm = document.querySelector("#newCategoryForm");
-        let allowanceLabel = document.querySelector("#allowanceLabel");
 
         document.querySelector(".categoryType").style.display = "none";
         newCategoryForm.style.display = "flex";
