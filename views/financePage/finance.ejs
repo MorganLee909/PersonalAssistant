@@ -102,8 +102,8 @@
                             <input id="categoryName" type="text" required>
                         </label>
 
-                        <label id="allowanceLabel">Amount:
-                            <input id="allowanceInput" type="number">
+                        <label>Amount:
+                            <input id="catAmount" type="number">
                         </label>
 
                         <input type="submit" value="Submit">
@@ -159,6 +159,7 @@
 
         <script>let user = <%- JSON.stringify(user) %>;</script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/shared/validation.js"></script>
         <script src="/financePage/home.js"></script>
         <script src="/financePage/transaction.js"></script>
         <script src="/financePage/categories.js"></script>

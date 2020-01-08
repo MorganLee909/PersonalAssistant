@@ -99,7 +99,7 @@ module.exports = {
 
         User.findOne({_id: req.session.user})
             .then((user)=>{
-                user.account.categories[req.body.categoryName].push(req.body.data);
+                user.account.categories.push(req.body);
                 user.save()
                     .then((user)=>{
                         return res.json({});
@@ -110,6 +110,7 @@ module.exports = {
                             displayMessage: errorMessage,
                             error: err
                         });
+                        console.log(err);
                         error.save;
 
                         return res.json(errorMessage);

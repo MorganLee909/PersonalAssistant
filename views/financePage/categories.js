@@ -16,27 +16,32 @@ let categoriesObj = {
         newCategoryForm.style.display = "flex";
 
         newCategoryForm.categoryType = type;
-
-        if(type === "allowance"){
-            console.log("isallow");
-            allowanceLabel.style.display = "block";
-        }else{
-            console.log("isallow");
-            allowanceLabel.style.display = "none";
-        }
     },
 
     submitNewCategory: function(){
-        let newCategoryForm = document.querySelector("#newCategoryForm");
-        let allowanceLabel = document.querySelector("#allowanceLabel");
-        let name = document.querySelecotr("#categoryName").value;
-        let quantity = 0;
+        event.preventDefault();
 
-        if(newCategoryForm.categoryType === "allowance"){
-            allowanceLabel.style.display = "block";
-            quantity = document.querySelector("#allowanceInput");
-        }else{
-            allowanceLabel.style.display = "none";
+        let form = document.querySelector("#newCategoryForm");
+
+        let newCategory = {
+            name: document.querySelector("#categoryName").value,
+            subCategory: form.categoryType,
+            amount: document.querySelector("#catAmount").value
+        }
+
+        if(validator.user.category.name(newCategory.name) && validator.user.category.quantity(newCategory.amount)){
+            axios.post("/budget/category/create", newCategory)
+                .then((response)=>{
+                    if(typeof(response.data) === "string"){
+                        banner.createError(response.data);
+                    }else{
+                        banner.createNotification(`Category '${newCategory.name}' has been created`);
+                        form.style.display = "none";
+                    }
+                })
+                .catch((err)=>{
+                    banner.createError("Error:  A bad thing happened that prevented good things from happening")
+                })
         }
     }
 }

@@ -43,26 +43,26 @@ let homeObj = {
         //Add categories to new transaction form
         let select = document.querySelector("#category");
 
-        for(let bill of user.account.bills){
-            let option = document.createElement("option");
-            option.value = bill._id;
-            option.innerText = bill.name;
-            select.appendChild(option);
-        }
+        // for(let bill of user.account.bills){
+        //     let option = document.createElement("option");
+        //     option.value = bill._id;
+        //     option.innerText = bill.name;
+        //     select.appendChild(option);
+        // }
 
-        for(let allowance of user.account.allowances){
-            let option = document.createElement("option");
-            option.value = allowance._id;
-            option.innerText = allowance.name;
-            select.appendChild(option);
-        }
+        // for(let allowance of user.account.allowances){
+        //     let option = document.createElement("option");
+        //     option.value = allowance._id;
+        //     option.innerText = allowance.name;
+        //     select.appendChild(option);
+        // }
 
-        for(let income of user.account.income){
-            let option = document.createElement("option");
-            option.value = income._id;
-            option.innerText = income.name;
-            select.appendChild(option);
-        }
+        // for(let income of user.account.income){
+        //     let option = document.createElement("option");
+        //     option.value = income._id;
+        //     option.innerText = income.name;
+        //     select.appendChild(option);
+        // }
 
         if(select.children.length <= 0){
             banner.createError("Please add one or more categories in order to create transactions");

@@ -46,6 +46,60 @@ let validator = {
                 return false;
             }
             return true;
+        },
+
+        category: {
+            name: function(name, createBanner = true){
+                if(!validator.isSanitary(name)){
+                    if(createBanner){
+                        banner.createError("The name contains invalid characters");
+                    }
+                    return false;
+                }
+
+                return true;
+            },
+
+            subCategory: function(subCat, createBanner = true){
+                if(subCat === "bill" || subCat === "allowance" || subCat === "income"){
+                    return true;
+                }
+
+                banner.createError("You have an incorrect type");
+                return false;
+            },
+
+            quantity: function(num, createBanner = true){
+                if(isNaN(num) || num === ""){
+                    if(createBanner){
+                        banner.createError("Must enter a valid number");
+                    }
+    
+                    return false;
+                }
+    
+                if(num < 0){
+                    if(createBanner){
+                        banner.createError("Quantity cannot be a negative number");
+                    }
+    
+                    return false;
+                }
+    
+                return true;
+            }
         }
-    },    
+    },
+    
+    isSanitary: function(str){
+        let disallowed = ["\\", "<", ">", "$"];
+
+        for(let char of disallowed){
+            if(str.includes(char)){
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
