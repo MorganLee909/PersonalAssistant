@@ -39,6 +39,10 @@ let homeObj = {
             location.innerText = transaction.location;
             row.appendChild(location);
 
+            let category = document.createElement("td");
+            category.innerText = transaction.category;
+            row.appendChild(category);
+
             let amount = document.createElement("td");
             amount.innerText = `$${Number(transaction.amount).toFixed(2)}`;
             row.appendChild(amount);
@@ -60,7 +64,7 @@ let homeObj = {
         for(let category of user.account.categories){
             let option = document.createElement("option");
             option.value = category.name;
-            option.innerText = `${category.name[0].toUpperCase()}${category.name.slice(1)}`;
+            option.innerText = `${category.name[0].toUpperCase()}${category.name.slice(1)} (${category.subCategory})`;
             select.appendChild(option);
         }
 
