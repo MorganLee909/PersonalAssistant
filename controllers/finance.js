@@ -99,32 +99,20 @@ module.exports = {
 
         User.findOne({_id: req.session.user})
             .then((user)=>{
+                req.body.name = req.body.name.toLowerCase();
                 user.account.categories.push(req.body);
                 user.save()
                     .then((user)=>{
                         return res.json({});
                     })
                     .catch((err)=>{
-                        let errorMessage = "Error: unable to save data";
-                        let error = new Error({
-                            displayMessage: errorMessage,
-                            error: err
-                        });
                         console.log(err);
-                        error.save;
-
-                        return res.json(errorMessage);
+                        return res.json("Error: unable to save data");
                     });
             })
             .catch((err)=>{
-                let errorMessage = "Error: Unable to retrieve user data";
-                let error = new Error({
-                    displayMessage: errorMessage,
-                    error: err
-                });
-                error.save();
-
-                return res.json(errorMessage);
+                console.log(err);
+                return res.json("Error: Unable to retrive user data");
             });
     }
 }
