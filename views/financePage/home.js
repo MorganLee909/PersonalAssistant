@@ -1,5 +1,6 @@
 let homeObj = {
     isPopulated: false,
+    categoriesPopulated: false,
     
     //Displays the main page
     //Populates the table with transactions
@@ -8,12 +9,15 @@ let homeObj = {
         controller.homeStrand.style.display = "flex";
 
         if(!this.isPopulated){
-            this.populate();
+            this.populateTransactions();
+        }
+
+        if(!this.categoriesPopulated){
+            this.populateCategories();
         }
     },
 
-    populate: function(){
-        //Populate transactions
+    populateTransactions: function(){
         let tbody = document.querySelector("#homeStrand tbody");
 
         while(tbody.children.length > 0){
@@ -39,9 +43,14 @@ let homeObj = {
             amount.innerText = `$${Number(transaction.amount).toFixed(2)}`;
             row.appendChild(amount);
         }
+    },
 
-        //Add categories to new transaction form
+    populateCategories: function(){
         let select = document.querySelector("#category");
+
+        while(select.children.length > 0){
+            select.removeChild(select.firstChild);
+        }
 
         let option = document.createElement("option");
         option.value = "discretionary";
@@ -54,8 +63,6 @@ let homeObj = {
             option.innerText = `${category.name[0].toUpperCase()}${category.name.slice(1)}`;
             select.appendChild(option);
         }
-
-        
 
         if(select.children.length <= 0){
             banner.createError("Please add one or more categories in order to create transactions");

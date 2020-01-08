@@ -10,6 +10,7 @@ let categoriesObj = {
         let billTable = document.querySelector("#billTable tbody");
         let incomeTable = document.querySelector("#incomeTable tbody");
         let allowanceTable = document.querySelector("#allowanceTable tbody");
+        let discretionaryTable = document.querySelector("#discretionaryTable tbody");
 
         while(billTable.children.length > 0){
             billTable.removeChild(billTable.firstChild);
@@ -38,20 +39,24 @@ let categoriesObj = {
             amount.innerText = `$${transaction.amount}`;
             row.appendChild(amount);
 
-            let subCategory = "";
-            for(let category of user.account.categories){
-                if(category.name === transaction.category){
-                    subCategory = category.subCategory;
-                    break;
-                }
-            }
-
-            if(subCategory === "bill"){
-                billTable.appendChild(row);
-            }else if(subCategory === "income"){
-                incomeTable.appendChild(row);
+            if(transaction.category == "discretionary"){
+                discretionaryTable.appendChild(row);
             }else{
-                allowanceTable.appendChild(row);
+                let subCategory = "";
+                for(let category of user.account.categories){
+                    if(category.name === transaction.category){
+                        subCategory = category.subCategory;
+                        break;
+                    }
+                }
+
+                if(subCategory === "bill"){
+                    billTable.appendChild(row);
+                }else if(subCategory === "income"){
+                    incomeTable.appendChild(row);
+                }else{
+                    allowanceTable.appendChild(row);
+                }
             }
         }
     },
