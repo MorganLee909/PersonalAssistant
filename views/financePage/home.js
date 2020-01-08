@@ -43,6 +43,11 @@ let homeObj = {
         //Add categories to new transaction form
         let select = document.querySelector("#category");
 
+        let option = document.createElement("option");
+        option.value = "discretionary";
+        option.innerText = "Discretionary";
+        select.appendChild(option);
+
         for(let category of user.account.categories){
             let option = document.createElement("option");
             option.value = category.name;
@@ -71,7 +76,7 @@ let homeObj = {
         }
 
         axios.post("/budget/transaction", transaction)
-            .then(()=>{
+            .then((response)=>{
                 user.account.balance = (Number(user.account.balance) + Number(transaction.amount)).toFixed(2).toString();
                 document.querySelector("#balance").innerText = user.account.balance;
                 user.account.transactions.unshift(transaction);
