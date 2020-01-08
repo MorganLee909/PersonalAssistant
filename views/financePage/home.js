@@ -84,10 +84,26 @@ let homeObj = {
 
         axios.post("/budget/transaction", transaction)
             .then((response)=>{
-                user.account.balance = (Number(user.account.balance) + Number(transaction.amount)).toFixed(2).toString();
-                document.querySelector("#balance").innerText = user.account.balance;
-                user.account.transactions.unshift(transaction);
-                this.display();
+                if(typeof(response.data) === "string"){
+                    banner.createError(response.data);
+                }else{
+                    let subCategory = "";
+                    for(let category of user.account.categories){
+                        if(category.name === transaction.category){
+                            subCategory = category.subCategory;
+                            break;
+                        }
+                    }
+                    if(subCategory === "income"){
+                        user.account.balance = (Number(user.account.balance) + Number(transaction.amount)).toFixed(2).toString();
+                    }else{
+                        user.account.balance = (Number(user.account.balance) - Number(transaction.amount)).toFixed(2).toString();
+                    }
+                    
+                    document.querySelector("#balance").innerText = user.account.balance;
+                    user.account.transactions.unshift(transaction);
+                    this.display();
+                }
             })
             .catch((err)=>{
                 banner.createError("Looks like there's been an oopsie");

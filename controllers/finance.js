@@ -47,43 +47,37 @@ module.exports = {
             .then((transaction)=>{
                 User.findOne({_id: req.session.user})
                     .then((user)=>{
-                        user.account.balance = (user.account.balance + transaction.amount).toFixed(2);
+                        let subCategory = "";
+                        for(let category of user.account.categories){
+                            if(category.name === transaction.category){
+                                subCategory = category.subCategory;
+                                break;
+                            }
+                        }
+                        if(subCategory === "income"){
+                            user.account.balance = (user.account.balance + transaction.amount).toFixed(2);
+                        }else{
+                            user.account.balance = (user.account.balance - transaction.amount).toFixed(2);
+                        }
+                        
                         user.account.transactions.push(transaction);
                         user.save()
                             .then((user)=>{
                                 return res.json({});
                             })
                             .catch((err)=>{
-                                let errorMessage = "Error: Unable to save data";
-                                let error = new Error({
-                                    displayMessage: errorMessage,
-                                    error: err
-                                });
-                                error.save();
-
-                                return res.json(errorMessage);
+                                console.log(err);
+                                return res.json("Error: Unable to save data");
                             });
                     })
                     .catch((err)=>{
-                        let errorMessage = "Error: Unable to retrieve user data";
-                        let error = new Error({
-                            displayMessage: errorMessage,
-                            error: err
-                        });
-                        error.save();
-
-                        return res.json(errorMessage);
+                        console.log(err);
+                        return res.json("Error: Unable to retrieve user data");
                     })
             })
             .catch((err)=>{
-                let errorMessage = "Error: Unable to create a new transaction";
-                let error = new Error({
-                    displayMessage: errorMessage,
-                    error: err
-                });
-                error.save();
-
-                return res.json(displayMessage);
+                console.log(err);
+                return res.json("Error: Unable to create a new transaction");
             });
     },
 
