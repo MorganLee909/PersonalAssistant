@@ -2,11 +2,13 @@ let homeObj = {
     isPopulated: false,
     categoriesPopulated: false,
     
-    //Displays the main page
-    //Populates the table with transactions
     display: function(){
         controller.clearScreen();
         controller.homeStrand.style.display = "flex";
+
+        let headComp = document.querySelector("#headComp");
+        let headCompClone = document.importNode(headComp.content, true);
+        controller.homeStrand.insertBefore(headCompClone, controller.homeStrand.children[0]);;
 
         if(!this.isPopulated){
             this.populateTransactions();
@@ -27,7 +29,7 @@ let homeObj = {
         for(let transaction of user.account.transactions){
             let transactionDate = new Date(transaction.date);
             let row = document.createElement("tr");
-            row.onclick = ()=>{transactionObj.display(transaction._id);};
+            row.onclick = ()=>{transactionObj.display(transaction, homeObj);};
             row.classList = "transRow";
             tbody.appendChild(row);
 

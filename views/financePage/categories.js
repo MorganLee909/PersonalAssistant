@@ -1,6 +1,7 @@
 let categoriesObj = {
     display: function(){
         controller.clearScreen();
+        controller.headComponent.style.display = "flex";
         controller.categoriesStrand.style.display = "flex";
 
         this.populateTables();
@@ -26,6 +27,8 @@ let categoriesObj = {
 
         for(let transaction of user.account.transactions){
             let row = document.createElement("tr");
+            row.onclick = ()=>{transactionObj.display(transaction, categoriesObj);};
+            row.classList = "transRow";
 
             let date = document.createElement("td");
             date.innerText = (new Date(transaction.date)).toDateString();
@@ -92,12 +95,13 @@ let categoriesObj = {
                         banner.createError(response.data);
                     }else{
                         banner.createNotification(`Category '${newCategory.name}' has been created`);
-                        form.style.display = "none";
                     }
                 })
                 .catch((err)=>{
                     banner.createError("Error:  A bad thing happened that prevented good things from happening")
                 })
         }
+
+        document.querySelector(".newCategory").style.display = "none";
     }
 }

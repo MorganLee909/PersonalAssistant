@@ -1,3 +1,5 @@
+/* Strands */
+/* Home Strand */
 #homeStrand{
     display: flex;
     flex-direction: column;
@@ -75,6 +77,7 @@
                 background: rgba(0, 0, 0, 0.075);
             }
 
+/* Transaction Strand */
 #transactionStrand{
     display: none;
     flex-direction: column;
@@ -98,6 +101,7 @@
                 color: black;
             }
 
+/* Categories Strand */
 #categoriesStrand{
     display: none;
     flex-direction: column;
@@ -136,3 +140,20 @@
         border: none;
         box-shadow: none;
     }
+
+/* Components */
+/* Head */
+.financeHead{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .strandSelector{
+        display: flex;
+        justify-content: space-around;
+    }
+
+        .strandSelector > *{
+            margin: 15px;
+        }
