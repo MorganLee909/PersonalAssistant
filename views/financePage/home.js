@@ -6,9 +6,7 @@ let homeObj = {
         controller.clearScreen();
         controller.homeStrand.style.display = "flex";
 
-        let headComp = document.querySelector("#headComp");
-        let headCompClone = document.importNode(headComp.content, true);
-        controller.homeStrand.insertBefore(headCompClone, controller.homeStrand.children[0]);;
+        document.querySelector("finance-head").strand = "home";
 
         if(!this.isPopulated){
             this.populateTransactions();

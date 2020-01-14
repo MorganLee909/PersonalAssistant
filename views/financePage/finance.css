@@ -4,12 +4,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 25px;
     text-align: center;
 }
 
     #homeStrand > *{
-        margin: 15px;
+        margin: 5px 15px;
     }
 
     .head{
@@ -142,18 +141,23 @@
     }
 
 /* Components */
-/* Head */
-.financeHead{
-    display: none;
-    flex-direction: column;
-    align-items: center;
+.strandSelector{
+    display: flex;
+    justify-content: space-around;
 }
 
-    .strandSelector{
-        display: flex;
-        justify-content: space-around;
+    .strandSelector > *{
+        margin: 15px;
     }
 
-        .strandSelector > *{
-            margin: 15px;
-        }
+.strandChoice{
+    font-size: 20px;
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+
+.currentStrand{
+    font-size: 20px;
+    margin-bottom: 25px;
+    border-bottom: 5px solid black;
+}

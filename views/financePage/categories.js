@@ -1,8 +1,9 @@
 let categoriesObj = {
     display: function(){
         controller.clearScreen();
-        controller.headComponent.style.display = "flex";
         controller.categoriesStrand.style.display = "flex";
+
+        document.querySelector("finance-strand").strand = "categories";
 
         this.populateTables();
     },
