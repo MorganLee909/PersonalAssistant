@@ -1,23 +1,17 @@
 let transactionObj = {
     //Detailed display of a single transaction
-    display: function(id){
+    display: function(transaction, location){
         controller.clearScreen();
+        controller.headComponent.style.display = "none";
         controller.transactionStrand.style.display = "flex";
+        document.querySelector("#returnButton").onclick = ()=>{location.display();};
 
         document.querySelector("#transBalance").innerText = user.account.balance;
 
-        let currentTransaction = {};
-        for(let transaction of user.account.transactions){
-            if(transaction._id === id){
-                currentTransaction = transaction;
-                break;
-            }
-        }
-
-        document.querySelector("#transDate").innerText = new Date(currentTransaction.date).toDateString();
-        document.querySelector("#transCategory").innerText = `${currentTransaction.category[0].toUpperCase()}${currentTransaction.category.slice(1)}`;
-        document.querySelector("#transLocation").innerText = currentTransaction.location;
-        document.querySelector("#transAmount").innerText = `$${currentTransaction.amount}`;
-        document.querySelector("#transNote").innerText = currentTransaction.note;
+        document.querySelector("#transDate").innerText = new Date(transaction.date).toDateString();
+        document.querySelector("#transCategory").innerText = `${transaction.category[0].toUpperCase()}${transaction.category.slice(1)}`;
+        document.querySelector("#transLocation").innerText = transaction.location;
+        document.querySelector("#transAmount").innerText = `$${transaction.amount}`;
+        document.querySelector("#transNote").innerText = transaction.note;
     },
 }
