@@ -1,4 +1,4 @@
-let transactionObj = {
+window.transactionObj = {
     //Detailed display of a single transaction
     display: function(transaction, location){
         controller.clearScreen();

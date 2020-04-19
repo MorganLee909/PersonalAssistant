@@ -1,4 +1,4 @@
-let categoriesObj = {
+window.categoriesObj = {
     display: function(){
         controller.clearScreen();
         controller.categoriesStrand.style.display = "flex";

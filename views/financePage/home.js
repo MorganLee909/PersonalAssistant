@@ -1,4 +1,4 @@
-let homeObj = {
+window.homeObj = {
     isPopulated: false,
     categoriesPopulated: false,
     
